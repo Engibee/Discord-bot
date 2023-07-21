@@ -1,6 +1,7 @@
 import discord
-import view
 from decouple import config
+
+import view
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -15,6 +16,7 @@ class MyClient(discord.Client):
             
         command = message.content.split(" ")[0]
         argument = message.content.replace(f"{command} ","")
+
         view.do_something(command,argument)
 
 

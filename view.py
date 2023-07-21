@@ -1,5 +1,4 @@
 import model
-from control import MyClient
 
 def do_something(com,argu):
     match(com):
@@ -10,4 +9,4 @@ def do_something(com,argu):
         case "!cot":
             model.cot(argu)
         case _:
-            MyClient.message.channel.send("Comando inválido")
+            print("Oopsie")
