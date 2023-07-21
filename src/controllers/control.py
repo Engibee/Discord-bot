@@ -1,7 +1,7 @@
 import discord
 from decouple import config
 
-import view
+from views import view
 
 
 class MyClient(discord.Client):

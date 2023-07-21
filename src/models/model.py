@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup as soup
 
-from control import MyClient
+from controllers.control import MyClient
 
 
 async def cot(argument):
