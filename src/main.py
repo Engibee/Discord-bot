@@ -1,8 +1,25 @@
-from views import view
+import os
 
-if __name__ == '__main__':
-    mensagem = '!rank engibee'
-    comando = mensagem.split(' ')[0]
+import discord
+from discord.ext import commands
+from decouple import config
+from controllers import control
 
-    argu = mensagem.split(' ')[1:]
-    view.do_something(comando, argu)
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(intents=intents,command_prefix='!')
+
+@bot.command(name='rank')
+async def rank(ctx,*,arg):
+    await ctx.send(control.rank_check(arg))
+
+@bot.command(name='rsge')
+async def rsge(ctx,*,arg):
+    await ctx.send(control.ge_pricecheck(arg))
+
+@bot.command(name='cot')
+async def cot(ctx,*,arg):
+    await ctx.send(control.cot(arg))
+
+bot.run(config('discord_bot_key'))
