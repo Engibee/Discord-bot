@@ -14,12 +14,15 @@ def cot(argument):
         output = cota[f'{tocon}{fromcon}']['bid']
         return f'The conversion {tocon} to {fromcon} is: {output}'
     
-    cota = requests.get(
-            f'https://economia.awesomeapi.com.br/json/last/{argument}'
-        )
-    cota = cota.json()
-    output = cota[f'{argument}BRL']['bid']
-    return f'The conversion {argument} to BRL is: {output}'
+    try:
+        cota = requests.get(
+                f'https://economia.awesomeapi.com.br/json/last/{argument}'
+            )
+        cota = cota.json()
+        output = cota[f'{argument}BRL']['bid']
+        return f'The conversion {argument} to BRL is: {output}'
+    except:
+        return f'Sorry but you commited an input error (Ooopsie)\neither that, or the API server is offline.'
 
 
 
@@ -67,10 +70,13 @@ def rank_check(argument):
 
 
 def ge_pricecheck(argument):
-    url = f'https://oldschool.runescape.wiki/w/{argument}'
-    html = requests.get(url)
-    bs = soup(html.text, 'html.parser').find('div', class_='GEdataprices')
-    item_id = bs['data-itemid']
+    try:
+        url = f'https://oldschool.runescape.wiki/w/{argument}'
+        html = requests.get(url)
+        bs = soup(html.text, 'html.parser').find('div', class_='GEdataprices')
+        item_id = bs['data-itemid']
+    except:
+        return "Couldn't find the item."
 
     osrsgeresponse = requests.get(
         f'https://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={item_id}'
