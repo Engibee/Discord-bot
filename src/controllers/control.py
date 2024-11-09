@@ -23,6 +23,8 @@ class Discord_bot():
         @self.bot.command(name='cot')
         async def cot(ctx,*,arg):
             await ctx.send(model.Commands_methods.cot(arg))
+            
     def run(self):
         self.bot_commands()
         self.bot.run(config('discord_bot_key'))
+
