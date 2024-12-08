@@ -73,11 +73,16 @@ class Commands_methods:
     def ge_pricecheck(argument):
         try:
             url = f'https://oldschool.runescape.wiki/w/{argument}'
-            html = requests.get(url)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+            }
+            html = requests.get(url, headers=headers)
+            html.raise_for_status()
             bs = soup(html.text, 'html.parser').find('div', class_='GEdataprices')
             item_id = bs['data-itemid']
         except:
-            return "Couldn't find the item."
+            return "I could not find the item."
+
 
         osrsgeresponse = requests.get(
             f'https://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={item_id}'
